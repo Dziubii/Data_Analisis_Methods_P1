@@ -1,0 +1,5 @@
+pandas
+seaborn
+scipy
+scikit-learn
+pyqt6
