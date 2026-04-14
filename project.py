@@ -161,12 +161,14 @@ def visualize_pca(X, clusters, k, label):
     """Redukuje wymiarowość do 2D za pomocą PCA i wizualizuje przypisanie do skupień."""
     pca = PCA(n_components=2)
     X_pca = pca.fit_transform(X)
+    var = pca.explained_variance_ratio_ * 100
+    print(f"PCA ({label}): PC1={var[0]:.2f}%, PC2={var[1]:.2f}%, suma={var.sum():.2f}%")
 
     plt.figure(figsize=(10, 7))
     scatter = plt.scatter(X_pca[:, 0], X_pca[:, 1], c=clusters, cmap="tab10", alpha=0.8)
     plt.title(f"PCA 2D - klasteryzacja {label} (k={k})")
-    plt.xlabel("PC1")
-    plt.ylabel("PC2")
+    plt.xlabel(f"PC1 ({var[0]:.1f}%)")
+    plt.ylabel(f"PC2 ({var[1]:.1f}%)")
     plt.colorbar(scatter, label="Numer skupienia")
     plt.show()
 
